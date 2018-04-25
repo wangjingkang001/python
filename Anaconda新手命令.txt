@@ -1,0 +1,27 @@
+0.使用
+开始菜单-管理员身份运行
+
+
+1.我创建的环境
+py3_AI
+
+
+2.常用命令
+0）#创建环境
+conda create -n py3 python=3 
+1）#进入某个环境
+activate py3_AI
+2）#查看环境下的包
+conda list
+3）#离开环境
+在 Windows ：deactivate
+在 OSX/Linux ：source deactivat
+4）#共享环境
+将你当前的环境保存到文件中包保存为YAML文件conda env export > environment.yaml 
+可以在当前终端运行目录下找到此文件
+李铁柱在他电脑上，进入他的环境，然后使用此命令#其中-f表示你要导出文件在本地的路径，所以/path/to/environment.yml要换成你本地的实际路径
+conda env update -f=/path/to/environment.yml
+不使用conda还有方法就是导出txt，这里没研究
+5）# 查看所以安装的环境
+conda info -e
+6）
