@@ -25,7 +25,7 @@ def eleCounter(Path):
 	cv2.drawContours(canvas,xcnts,-1,(0,0,255),2)
 	print("cells nums:{}/{}".format(len(xcnts),len(cnts)))
 
-	#显示图像
+	#显示图像s
 	cv2.imshow("src",img)
 	cv2.imshow("Gray",gray)
 	cv2.imshow("Gauss",gauss)
