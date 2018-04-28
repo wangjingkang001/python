@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+# 注意tkinter适合写一些简单的 对界面美观没要求的UI 工程量大的还是推荐另外的UI库 #
 #import tkitner # python3中t为小写
 from tkinter import * # 此写法，不用再库中方法名前面调用tkinter.Tk等
 
