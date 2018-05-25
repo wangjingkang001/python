@@ -9,7 +9,11 @@ py3_AI
 0）#创建环境
 conda create -n py3 python=3 
 1）#进入某个环境
+WIN
 activate py3_AI
+OS
+source activate py3_AI
+
 2）#查看环境下的包
 conda list
 3）#离开环境
