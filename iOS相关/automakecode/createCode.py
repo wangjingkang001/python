@@ -18,12 +18,25 @@ s = os.sep #多平台 路径分割符号是'\',在Linux上是‘/’
 
 
 #随机生成文件配置类
-
 baseFileNameList_OC = []                   # 文件名存储list_OC
 baseFileDic_OC = {}                        # 文件名和类名的字典_OC
+
+baseFileNameList_C = []                    # 文件名和类名的字典_C
+baseFileDic_C = {}                         # 文件名和类名的字典_C
+
+ocFileRandomMin = 10
+ocFileRandomMax = 30
+cFileRandomMin = 5
+cFileRandomMax = 20
+cppFileRandomMin = 1
+cppFileRandomMax = 5
+
+baseFileTitle = ['Auto', 'Make', 'File', 'Del', 'FindMine','KuYi','CFG','WenQi','Done','Feimiao']
+
 baseNowDateTimes = '2016/06/06'         # 注释中日期
 baseString = 'china'                    # 注释中图片
 baseRadomString = 'ASDFZXC'             # 注释中图片
+baseImageTitle = ['佛祖', '老天', '大地', '瑞兽', '小凡', '虚竹', '乔峰','段誉','龙神','TI']   # 注释中图片Title  
 baseTitleNameString = 'wangjk'          # 注释中name
 baseContext = {                         # 模拟配置项
     'key' : 'wang',
@@ -100,10 +113,8 @@ def getHeadName():
     return random.choice ( ['get'])
 #----------------------------------------------------通用模块end------------------------------------------------
 
+#----------------------------------------------------生成一个图形注释start---------------------------------------------
 
-
-#----------------------------------------------------生成文件信息模块start------------------------------------------------
-# 生成一个图形注释 
 def addDaHuang():
     text = [
     '\n/**                                                                         '+baseString+'保佑必过包',
@@ -168,6 +179,62 @@ def addCNM():
         '//          ┗━┻━┛   ┗━┻━┛          \n'
     ]
     return text
+def addFZ():
+    text = [
+        '//                            _ooOoo_          \n',
+        '//                           o8888888o         \n',
+        '//                           88" . "88         \n',
+        '//                           (| -_- |)         \n',
+        '//                           O\  =  /O         \n',
+        '//                        ____/`---`\____      \n',
+        '//                      .`  \\|     |//  `.    \n',
+        '//                     /  \\|||  :  |||//  \   \n',
+        '//                    /  _||||| -:- |||||-  \  \n',
+        '//                    |   | \\\  -  /// |   |  \n',
+        '//                    | \_|  ''\---/''  |   |  \n',
+        '//                    \  .-\__  `-`  ___/-. /  \n',
+        '//                  ___`. .  '+'//"--.--\  `. . __\n',
+        '//               .'+'  < '+'  `.___\_<|>_/___.' +'>.'+' \n',
+        '//              | | :  `- \`.;`\ _ /`;.`/ - ` : | |\n',
+        '//              \  \ `-.   \_ __\ /__ _/   .-` /  /\n',
+        '//         ======`-.____`-.___\_____/___.-`____.-''======\n',
+        '//                            `=---=''                    \n',
+        '//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n',
+        '//                      Buddha Bless, No Bug !            \n'
+    ]
+    return text
+
+def addCNM2():
+    text = [
+    '/**\n',
+    '*　　　　　　　 ┏┓       ┏┓+ +\n',
+    '*　　　　　　　┏┛┻━━━━━━━┛┻┓ + +\n',
+    '*　　　　　　　┃　　　　　　 ┃\n',
+    '*　　　　　　　┃　　　━　　　┃ ++ + + +\n',
+    '*　　　　　　 █████━█████  ┃+\n',
+    '*　　　　　　　┃　　　　　　 ┃ +\n',
+    '*　　　　　　　┃　　　┻　　　┃\n',
+    '*　　　　　　　┃　　　　　　 ┃ + +\n',
+    '*　　　　　　　┗━━┓　　　 ┏━┛\n',
+    '*               ┃　　  ┃\n',
+    '*　　　　　　　　　┃　　  ┃ + + + +\n',
+    '*　　　　　　　　　┃　　　┃　Code is far away from     bug with the animal protecting\n',
+    '*　　　　　　　　　┃　　　┃ + 　　　　         神兽保佑,代码无bug\n',
+    '*　　　　　　　　　┃　　　┃\n',
+    '*　　　　　　　　　┃　　　┃　　+\n',
+    '*　　　　　　　　　┃　 　 ┗━━━┓ + +\n',
+    '*　　　　　　　　　┃ 　　　　　┣┓\n',
+    '*　　　　　　　　　┃ 　　　　　┏┛\n',
+    '*　　　　　　　　　┗┓┓┏━━━┳┓┏┛ + + + +\n',
+    '*　　　　　　　　　 ┃┫┫　 ┃┫┫\n',
+    '*　　　　　　　　　 ┗┻┛　 ┗┻┛+ + + +\n',
+    '*/\n'
+    ]
+    return text
+#----------------------------------------------------生成一个图形注释end---------------------------------------------
+
+
+#----------------------------------------------------生成文件信息模块start------------------------------------------------
 
 # 自动生成oc.h文件
 def autoTexth(filename):
@@ -335,6 +402,8 @@ def addOneCppFile(filename):
 
 # 生成C文件 这里指生成混合文件 .mm包含c cpp oc
 def addOneCFile(filename):
+    #把文件名加入list
+    baseFileNameList_C.append(filename)
     #生成h文件
     fp = open(baseContext['c_out_path'] + s+filename+".h",'w')
     text = autoTextCH(filename)
@@ -382,8 +451,19 @@ def createBaseFile():
     # os.mknod(filename+".h")
     fp = open(baseContext['base_out_path'] + s+fileName+".h",'w')
     #生成h文件内容并写入
-    # text = addDaHuang()
-    text = addCNM()
+
+    #标志logo
+    logoNumber = random.randint(1,4)
+    print(logoNumber)
+    if logoNumber == 1:
+        text = addDaHuang()
+    elif logoNumber == 2:
+        text = addCNM()
+    elif logoNumber == 3:
+        text = addCNM2()
+    elif logoNumber == 4:
+        text = addFZ()
+    
     text = text + autoBaseH(fileName)
     for item in text:
         fp.write(item)
@@ -419,27 +499,39 @@ def autoBaseM(filename):
         '\n',
         '#import \"'+filename+'.h\"\n']
     #加入 import
-    for a in baseFileNameList_OC:
-        addTest = ['#import \"'+a+'.h\"\n']
+    for oc in baseFileNameList_OC:
+        addTest = ['#import \"'+oc+'.h\"\n']
         text = text + addTest
         pass
+
+    for c in baseFileNameList_C:
+        addTest = ['#import \"'+ c + '.h\"\n']
+        text = text + addTest
+        pass
+    
     midText = ['@implementation '+filename+'\n',
             '\n',
             '+ (NSString*)find'+filename+'\n',
             '{\n']
     text = text + midText
     #加入方法
-    for a in baseFileNameList_OC:
-        codeNameList = baseFileDic_OC[a]
+    for oc in baseFileNameList_OC:
+        codeNameList = baseFileDic_OC[oc]
         for code in codeNameList:
-            addTest = ['    //title '+ a +' '+ code +'\n',
-                    '   ['+a+' '+code+'];\n']
+            addTest = ['    //title '+ oc +' '+ code +'\n',
+                    '   ['+ oc +' '+code+'];\n']
             text = text + addTest
             pass
         
         pass
+    for c in baseFileNameList_C:
+        x = str(random.randint(1,100))
+        y = str(random.randint(1,200))
+        addTest = ['   '+c +'( '+x+','+y+' )'+';\n']
+        text = text + addTest
+        pass
 
-    lastext = ['   NSString *find = @\"'+str(random.randint(10000,100000))+'\";\n',
+    lastext = ['\n   NSString *find = @\"'+str(random.randint(10000,100000))+'\";\n',
         '   NSLog(@"%@",find);\n'
         '    return find;\n',
         '}\n',
@@ -462,23 +554,34 @@ def autoBaseM(filename):
 def main():
 
     #0.初始化 全局变量
+
+    global ocFileRandomMin
+    global ocFileRandomMax
+    global cFileRandomMin
+    global cFileRandomMax
+    global cppFileRandomMin
+    global cppFileRandomMax
+
+    global baseFileTitle
+    global baseImageTitle
     global baseNowDateTimes
     global baseFileNameList_OC
+    global baseFileNameList_C
     global baseString
     global baseRadomString
     global baseContext
     global baseTitleNameString
 
     baseTitleNameString = ''.join(random.sample(string.ascii_letters + string.digits, 6))
-    baseString = random.choice ( ['佛祖', '老天', '大地', '瑞兽', '小凡', '虚竹', '乔峰','段誉','龙神','TI'])
+    baseString = random.choice (baseImageTitle)
     baseRadomString = ''.join(random.sample(string.ascii_letters + string.digits, 6)) #随机字符串
     baseNowDateTimes = datetime.datetime.now().strftime('%Y/%m/%d/%H/%M/%S')
 
     # randomFile = './File_' + ''.join(random.sample(string.ascii_letters + string.digits, 4))
-    randomFile = '.'+s+'File_' + 'newFiles' #方便测试这里写死
-    randomFileOC = randomFile + s+'OC_' + ''.join(random.sample(string.ascii_letters + string.digits, 3))
-    randomFileC = randomFile + s+'C_' + ''.join(random.sample(string.ascii_letters + string.digits, 3))
-    randomFileCPP = randomFile + s+'CPP_' + ''.join(random.sample(string.ascii_letters + string.digits, 3))
+    randomFile = '.'+ s +'File_' + 'newFiles' #方便测试这里写死
+    randomFileOC = randomFile + s +'OC_' + ''.join(random.sample(string.ascii_letters + string.digits, 3))
+    randomFileC = randomFile + s +'C_' + ''.join(random.sample(string.ascii_letters + string.digits, 3))
+    randomFileCPP = randomFile + s +'CPP_' + ''.join(random.sample(string.ascii_letters + string.digits, 3))
     baseContext['base_out_path'] = randomFile
     baseContext['oc_out_path'] = randomFileOC
     baseContext['cpp_out_path'] = randomFileCPP
@@ -488,26 +591,25 @@ def main():
     delAllFiles()
 
     #2.生成 oc随机文件
-    for a in range(random.randint(10,30)):
+    for a in range(random.randint(ocFileRandomMin,ocFileRandomMax)):
         filenumber = random.choice('abcdefghrjklmnopqrstu')
-        randomName = random.choice ( ['Auto', 'Make', 'File', 'Del', 'FindMine','KuYi','CFG','WenQi','Done','Feimiao'])
+        randomName = random.choice (baseFileTitle)
         filename = randomName + getOneName(filenumber + str(a))
         #生成文件.h.m
         addOneOcFile(filename)
         pass
     #3.生成 cpp随机文件
-    for a in range(random.randint(3,8)):
+    for a in range(random.randint(cppFileRandomMin,cppFileRandomMax)):
         filenumber = random.choice('vwxyz')
-        randomName = random.choice ( ['Auto', 'Make', 'File', 'Del', 'FindMine','KuYi','CFG','WenQi','Done','Feimiao'])
+        randomName = random.choice (baseFileTitle)
         filename = randomName + getOneName(filenumber + str(a))
         addOneCppFile(filename)
         pass
     
-
     #4.生成 c随机文件
-    for a in range(random.randint(3,5)):
+    for a in range(random.randint(cFileRandomMin,cFileRandomMax)):
         filenumber = random.choice('qwertryu')
-        randomName = random.choice ( ['Auto', 'Make', 'File', 'Del', 'FindMine','KuYi','CFG','WenQi','Done','Feimiao'])
+        randomName = random.choice (baseFileTitle)
         filename = randomName + getOneName(filenumber + str(a))
         addOneCFile(filename)
         pass
@@ -516,7 +618,6 @@ def main():
     createBaseFile()
 
     #最后
-    # print(baseFileNameList_OC)
     print 'Done~~~'
 
 if __name__ == "__main__":
