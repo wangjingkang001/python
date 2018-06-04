@@ -490,7 +490,7 @@ def autoBaseH(filename):
 def autoBaseM(filename):
     global baseFileDic_OC
 
-    text = ['//  '+filename+'.m\n',
+    text = ['//  '+filename+'.mm\n',
         '//  '+baseTitleNameString+'\n',
         '//  \n',
         '//  Created by '+baseTitleNameString+' on  '+baseNowDateTimes+'.\n',
